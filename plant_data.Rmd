@@ -1,0 +1,59 @@
+---
+title: "Moritz-Ivo Will Plant Science Data"
+author: "David Jackson"
+date: "12/16/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(scales)
+library(lubridate)
+library(janitor)
+```
+
+## Moritz-Ivo Will
+
+```{r}
+rm(list = ls())
+plant_science <- read_csv("./file.csv") %>% 
+  janitor::clean_names() 
+
+plant_science <- plant_science %>% janitor::remove_empty(which = c("rows","cols"))
+```
+
+```{r}
+summary(plant_science)
+```
+
+```{r}
+ggplot(plant_science) + geom_line(aes(x=time,y=x1c_par1,col="par1")) +
+  geom_smooth(aes(x=time,y=x1c_par1))
+
+ggplot(plant_science) + geom_line(aes(x=time,y=x1c_par2,col="par2")) +
+  geom_smooth(aes(x=time,y=x1c_par2))
+
+ggplot(plant_science) + geom_line(aes(x=time,y=x1c_par3,col="par3")) +
+  geom_smooth(aes(x=time,y=x1c_par3))
+
+ggplot(plant_science) + geom_line(aes(x=time,y=x1c_par4,col="par4")) +
+  geom_smooth(aes(x=time,y=x1c_par4))
+```
+
+
+```{r}
+ggplot(plant_science) + geom_point(aes(x=time,y=x1c_t1,col="t1")) +
+  geom_smooth(aes(x=time,y=x1c_t1))
+
+ggplot(plant_science) + geom_point(aes(x=time,y=x1c_t2,col="t2")) +
+  geom_smooth(aes(x=time,y=x1c_t2))
+
+ggplot(plant_science) + geom_point(aes(x=time,y=x1c_t3,col="t3")) +
+  geom_smooth(aes(x=time,y=x1c_t3))
+
+ggplot(plant_science) + geom_point(aes(x=time,y=x1c_t4,col="t4")) +
+  geom_smooth(aes(x=time,y=x1c_t4))
+```
+
+
