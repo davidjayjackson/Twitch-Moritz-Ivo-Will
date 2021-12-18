@@ -60,12 +60,55 @@ ggplot(sensor_x1c) + geom_point(aes(x=time,y=x1c_rh1,col="rh1")) +
 
 ```
 
-### Sensor X1C
+```{r}
+ggplot(sensor_x1c) + geom_point(aes(y=x1c_t1,x=x1c_rh1)) +
+  labs(title ="RH is relative humidity vs Tempature (c)",
+       y="Tempature in Celsius",x="Relative Humidity") +
+  geom_smooth(aes(x=x1c_rh1,y=x1c_t1))
+
+ggplot(sensor_x1c) + geom_point(aes(x=x1c_t1,y=x1c_rh1)) +
+  labs(title ="RH is relative humidity vs Tempature (c)",
+       y="Tempature in Celsius",x="Relative Humidity") +
+  geom_smooth(aes(x=x1c_t1,y=x1c_rh1))
+```
+
+
+### Sensor X1B
 
 ```{r}
 sensor_x1b <- plant_science %>% select(time,starts_with("x1b_"))
 sensor_x1b %>% dlookr::diagnose_numeric()
 ```
+
+
+```{r}
+ggplot(sensor_x1b) + geom_line(aes(x=time,y=x1b_par1,col="par1")) +
+  geom_smooth(aes(x=time,y=x1b_par1)) +
+  labs(title = "photosynthetic active radiation")
+
+ggplot(sensor_x1b) + geom_point(aes(x=time,y=x1b_t1,col="t1")) +
+  geom_smooth(aes(x=time,y=x1b_t1)) +
+  labs(title ="T is temperature in degrees Celsius") 
+
+ggplot(sensor_x1b) + geom_point(aes(x=time,y=x1b_rh1,col="rh1")) +
+  geom_smooth(aes(x=time,y=x1b_rh1)) +
+  labs(title ="RH is relative humidity") 
+
+```
+
+```{r}
+ggplot(sensor_x1b) + geom_point(aes(y=x1b_t1,x=x1b_rh1)) +
+  labs(title ="RH is relative humidity vs Tempature (c)",
+       y="Tempature in Celsius",x="Relative Humidity") +
+  geom_smooth(aes(x=x1b_rh1,y=x1b_t1))
+
+ggplot(sensor_x1b) + geom_point(aes(x=x1b_t1,y=x1b_rh1)) +
+  labs(title ="RH is relative humidity vs Tempature (c)",
+       y="Tempature in Celsius",x="Relative Humidity") +
+  geom_smooth(aes(x=x1b_t1,y=x1b_rh1))
+```
+
+
 
 ### Sensor X1P
 
@@ -73,3 +116,33 @@ sensor_x1b %>% dlookr::diagnose_numeric()
 sensor_x1p <- plant_science %>% select(time,starts_with("x1p_"))
 sensor_x1p %>% dlookr::diagnose_numeric()
 ```
+
+
+```{r}
+ggplot(sensor_x1p) + geom_line(aes(x=time,y=x1p_par1,col="par1")) +
+  geom_smooth(aes(x=time,y=x1p_par1)) +
+  labs(title = "photosynthetic active radiation")
+
+ggplot(sensor_x1p) + geom_point(aes(x=time,y=x1p_t1,col="t1")) +
+  geom_smooth(aes(x=time,y=x1p_t1)) +
+  labs(title ="T is temperature in degrees Celsius") 
+
+ggplot(sensor_x1p) + geom_point(aes(x=time,y=x1p_rh1,col="rh1")) +
+  geom_smooth(aes(x=time,y=x1p_rh1)) +
+  labs(title ="RH is relative humidity") 
+
+```
+
+```{r}
+ggplot(sensor_x1p) + geom_point(aes(y=x1p_t1,x=x1p_rh1)) +
+  labs(title ="RH is relative humidity vs Tempature (c)",
+       y="Tempature in Celsius",x="Relative Humidity") +
+  geom_smooth(aes(x=x1p_rh1,y=x1p_t1))
+
+ggplot(sensor_x1p) + geom_point(aes(x=x1p_t1,y=x1p_rh1)) +
+  labs(title ="RH is relative humidity vs Tempature (c)",
+       y="Tempature in Celsius",x="Relative Humidity") +
+  geom_smooth(aes(x=x1p_t1,y=x1p_rh1))
+```
+
+
