@@ -13,7 +13,16 @@ library(lubridate)
 library(janitor)
 ```
 
-## Moritz-Ivo Will
+## Report for Greenhouse X1
+* Source: Moritz-Ivo Will <moritz.ivo.will@gmail.com>
+
+### Jargon
+
+* the X1 is greenhouse 1, (there are also larger datasets with X2) . 
+* The c, b and p behind X1 are the location of the sensors.
+* PAR stands for photosynthetic active radiation (basically a measure of sunlight), 
+* T is temperature in degrees Celsius, and 
+* RH is relative humidity.
 
 ```{r}
 rm(list = ls())
@@ -24,36 +33,58 @@ plant_science <- plant_science %>% janitor::remove_empty(which = c("rows","cols"
 ```
 
 ```{r}
-summary(plant_science)
+
 ```
 
+#### Sensor X1C
+
 ```{r}
-ggplot(plant_science) + geom_line(aes(x=time,y=x1c_par1,col="par1")) +
+sensor_x1c <- plant_science %>% select(time:x1c_rh4)
+summary(sensor_x1c)
+```
+
+
+```{r}
+ggplot(sensor_x1c) + geom_line(aes(x=time,y=x1c_par1,col="par1")) +
   geom_smooth(aes(x=time,y=x1c_par1))
 
-ggplot(plant_science) + geom_line(aes(x=time,y=x1c_par2,col="par2")) +
+ggplot(sensor_x1c) + geom_point(aes(x=time,y=x1c_t1,col="t1")) +
+  geom_smooth(aes(x=time,y=x1c_t1))
+```
+```{r}
+ggplot(sensor_x1c) + geom_line(aes(x=time,y=x1c_par2,col="par2")) +
   geom_smooth(aes(x=time,y=x1c_par2))
 
-ggplot(plant_science) + geom_line(aes(x=time,y=x1c_par3,col="par3")) +
-  geom_smooth(aes(x=time,y=x1c_par3))
-
-ggplot(plant_science) + geom_line(aes(x=time,y=x1c_par4,col="par4")) +
-  geom_smooth(aes(x=time,y=x1c_par4))
-```
-
-
-```{r}
-ggplot(plant_science) + geom_point(aes(x=time,y=x1c_t1,col="t1")) +
-  geom_smooth(aes(x=time,y=x1c_t1))
-
-ggplot(plant_science) + geom_point(aes(x=time,y=x1c_t2,col="t2")) +
+ggplot(sensor_x1c) + geom_point(aes(x=time,y=x1c_t2,col="t2")) +
   geom_smooth(aes(x=time,y=x1c_t2))
 
-ggplot(plant_science) + geom_point(aes(x=time,y=x1c_t3,col="t3")) +
-  geom_smooth(aes(x=time,y=x1c_t3))
+```
+```{r}
+ggplot(sensor_x1c) + geom_line(aes(x=time,y=x1c_par3,col="par3")) +
+  geom_smooth(aes(x=time,y=x1c_par3))
 
-ggplot(plant_science) + geom_point(aes(x=time,y=x1c_t4,col="t4")) +
+ggplot(sensor_x1c) + geom_point(aes(x=time,y=x1c_t3,col="t3")) +
+  geom_smooth(aes(x=time,y=x1c_t3))
+```
+
+```{r}
+ggplot(sensor_x1c) + geom_line(aes(x=time,y=x1c_par4,col="par4")) +
+  geom_smooth(aes(x=time,y=x1c_par4))
+
+ggplot(sensor_x1c) + geom_point(aes(x=time,y=x1c_t4,col="t4")) +
   geom_smooth(aes(x=time,y=x1c_t4))
 ```
 
+#### Sensor X1C
 
+```{r}
+sensor_x1b <- plant_science %>% select(time,starts_with("x1b_"))
+summary(sensor_x1b)
+```
+
+#### Sensor X1P
+
+```{r}
+sensor_x1p <- plant_science %>% select(time,starts_with("x1p_"))
+summary(sensor_x1p)
+```
