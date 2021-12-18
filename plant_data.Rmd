@@ -2,15 +2,16 @@
 title: "Moritz-Ivo Will Plant Science Data"
 author: "David Jackson"
 date: "12/16/2021"
-output: html_document
+output: pdf_document
 ---
 
-```{r setup, include=FALSE}
+```{r setup, include=FALSE,message=FALSE,error=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
 library(scales)
 library(lubridate)
 library(janitor)
+library(dlookr)
 ```
 
 ## Report for Greenhouse X1
@@ -36,55 +37,39 @@ plant_science <- plant_science %>% janitor::remove_empty(which = c("rows","cols"
 
 ```
 
-#### Sensor X1C
+### Sensor X1C
 
 ```{r}
 sensor_x1c <- plant_science %>% select(time:x1c_rh4)
-summary(sensor_x1c)
+sensor_x1c %>% dlookr::diagnose_numeric()
 ```
 
 
 ```{r}
 ggplot(sensor_x1c) + geom_line(aes(x=time,y=x1c_par1,col="par1")) +
-  geom_smooth(aes(x=time,y=x1c_par1))
+  geom_smooth(aes(x=time,y=x1c_par1)) +
+  labs(title = "photosynthetic active radiation")
 
 ggplot(sensor_x1c) + geom_point(aes(x=time,y=x1c_t1,col="t1")) +
-  geom_smooth(aes(x=time,y=x1c_t1))
-```
-```{r}
-ggplot(sensor_x1c) + geom_line(aes(x=time,y=x1c_par2,col="par2")) +
-  geom_smooth(aes(x=time,y=x1c_par2))
+  geom_smooth(aes(x=time,y=x1c_t1)) +
+  labs(title ="T is temperature in degrees Celsius") 
 
-ggplot(sensor_x1c) + geom_point(aes(x=time,y=x1c_t2,col="t2")) +
-  geom_smooth(aes(x=time,y=x1c_t2))
+ggplot(sensor_x1c) + geom_point(aes(x=time,y=x1c_rh1,col="rh1")) +
+  geom_smooth(aes(x=time,y=x1c_rh1)) +
+  labs(title ="RH is relative humidity") 
 
 ```
-```{r}
-ggplot(sensor_x1c) + geom_line(aes(x=time,y=x1c_par3,col="par3")) +
-  geom_smooth(aes(x=time,y=x1c_par3))
 
-ggplot(sensor_x1c) + geom_point(aes(x=time,y=x1c_t3,col="t3")) +
-  geom_smooth(aes(x=time,y=x1c_t3))
-```
-
-```{r}
-ggplot(sensor_x1c) + geom_line(aes(x=time,y=x1c_par4,col="par4")) +
-  geom_smooth(aes(x=time,y=x1c_par4))
-
-ggplot(sensor_x1c) + geom_point(aes(x=time,y=x1c_t4,col="t4")) +
-  geom_smooth(aes(x=time,y=x1c_t4))
-```
-
-#### Sensor X1C
+### Sensor X1C
 
 ```{r}
 sensor_x1b <- plant_science %>% select(time,starts_with("x1b_"))
-summary(sensor_x1b)
+sensor_x1b %>% dlookr::diagnose_numeric()
 ```
 
-#### Sensor X1P
+### Sensor X1P
 
 ```{r}
 sensor_x1p <- plant_science %>% select(time,starts_with("x1p_"))
-summary(sensor_x1p)
+sensor_x1p %>% dlookr::diagnose_numeric()
 ```
